@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROBOZIK — Advanced Robotics &amp; Automation Lab</title>
+  <meta name="description" content="ROBOZIK builds humanoid robots, autonomous machines and AI-driven automation for the real world. From first prototype to certified fleet.">
+  <meta name="theme-color" content="#04070d">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="ROBOZIK — Advanced Robotics &amp; Automation Lab">
+  <meta property="og:description" content="Humanoids, machine vision, autonomous mobility and industrial automation. Engineered in San Francisco.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%2304070d'/%3E%3Cpath d='M24 6 40 15v18L24 42 8 33V15L24 6Z' fill='none' stroke='%2322e6ff' stroke-width='2'/%3E%3Crect x='16' y='19' width='6' height='9' rx='1' fill='%2322e6ff'/%3E%3Crect x='26' y='19' width='6' height='9' rx='1' fill='%2322e6ff'/%3E%3Cpath d='M24 11v5' stroke='%2322e6ff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <noscript><style>.preloader{display:none!important}body.is-loading{overflow:auto!important}.hero__title .line>span{transform:none!important}</style></noscript>
+</head>
+<body class="is-loading">
+
+  <!-- ===== SVG SPRITE ===== -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-logo" viewBox="0 0 48 48">
+      <path d="M24 4 42 14v20L24 44 6 34V14L24 4Z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M17 20h6v8h-6zM25 20h6v8h-6z" fill="currentColor" stroke="none"/>
+      <path d="M24 9v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="24" cy="7" r="2" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><rect x="10.5" y="10.5" width="3" height="3" rx=".5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-rover" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="8" rx="2"/><circle cx="7.5" cy="19.5" r="1.6"/><circle cx="16.5" cy="19.5" r="1.6"/><path d="M12 9V5M9.5 5h5M7 13h3M14 13h3"/></symbol>
+    <symbol id="i-arm" viewBox="0 0 24 24"><path d="M4 21h7M7.5 21v-4"/><circle cx="7.5" cy="14.5" r="2.2"/><path d="m9.5 13.4 5.3-2.2"/><circle cx="15.5" cy="10.6" r="2.2"/><path d="m17.2 9.2 2.3-3.4M19.5 5.8h-2.2M19.5 5.8v2.2"/><path d="M6 21h7"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+    <symbol id="i-support" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/><path d="M20 19v1a2 2 0 0 1-2 2h-4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4h4.2l11.8 16H15.8L4 4Z"/><path d="M20 4 4 20"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5V17M7.5 7.2v.1M11.5 17v-6.5M11.5 13.2a3 3 0 0 1 5.5 1.6V17"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.5 5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none"/></symbol>
+  </svg>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="boot-logo">
+        <svg viewBox="0 0 48 48"><use href="#i-logo"/></svg>
+        <span>ROBOZIK</span>
+      </div>
+      <div class="boot-bar"><span id="bootFill"></span></div>
+      <div class="boot-row">
+        <span id="bootStatus">Initializing neural core</span>
+        <span id="bootPct">0%</span>
+      </div>
+      <div class="boot-lines">
+        <p>&gt; mounting sensor array <span>OK</span></p>
+        <p>&gt; calibrating gyroscope <span>OK</span></p>
+        <p>&gt; loading vision model v4.2 <span class="boot-blink">...</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CURSOR / PROGRESS ===== -->
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"></span>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#home" aria-label="ROBOZIK home">
+        <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="brand__word">ROBO<em>ZIK</em></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#home" class="is-active">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#robots">Robots</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="#contact" class="btn btn--primary nav__cta" data-magnetic>Book a demo <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="#home"><span>01</span>Home</a>
+      <a href="#about"><span>02</span>About</a>
+      <a href="#services"><span>03</span>Services</a>
+      <a href="#robots"><span>04</span>Robots</a>
+      <a href="#process"><span>05</span>Process</a>
+      <a href="#contact"><span>06</span>Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:hello@robozik.io">hello@robozik.io</a>
+      <div class="socials">
+        <a href="#" aria-label="X / Twitter" class="social"><svg viewBox="0 0 24 24"><use href="#i-x"/></svg></a>
+        <a href="#" aria-label="LinkedIn" class="social"><svg viewBox="0 0 24 24"><use href="#i-in"/></svg></a>
+        <a href="#" aria-label="GitHub" class="social"><svg viewBox="0 0 24 24"><use href="#i-gh"/></svg></a>
+        <a href="#" aria-label="YouTube" class="social"><svg viewBox="0 0 24 24"><use href="#i-yt"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="grid-floor"></div>
+        <canvas id="net"></canvas>
+        <span class="glow glow--cyan"></span>
+        <span class="glow glow--violet"></span>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow" data-reveal><span class="eyebrow__dot"></span>Advanced robotics lab · est. 2019</p>
+          <h1 class="hero__title">
+            <span class="line" style="--i:0"><span>We build</span></span>
+            <span class="line" style="--i:1"><span>robots that</span></span>
+            <span class="line" style="--i:2"><span class="grad">think ahead.</span></span>
+          </h1>
+          <p class="hero__sub" data-reveal style="--d:120ms">Humanoid systems, autonomous machines and AI-driven automation — engineered for the places humans shouldn't go, and the work nobody should have to.</p>
+          <div class="hero__actions" data-reveal style="--d:220ms">
+            <a class="btn btn--primary" href="#robots" data-magnetic>Explore robots <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button class="btn btn--ghost" type="button" data-open-reel>
+              <span class="btn__play"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg></span>
+              Watch the reel
+            </button>
+          </div>
+          <div class="hero__stats" data-reveal style="--d:320ms">
+            <div class="stat"><span class="stat__value"><b data-count="128">128</b>+</span><span class="stat__label">Machines deployed</span></div>
+            <div class="stat"><span class="stat__value"><b data-count="99.2" data-decimals="1">99.2</b>%</span><span class="stat__label">Fleet uptime</span></div>
+            <div class="stat"><span class="stat__value"><b data-count="18">18</b></span><span class="stat__label">Countries</span></div>
+          </div>
+        </div>
+
+        <div class="hero__visual" data-reveal style="--d:200ms">
+          <div class="bot-stage" id="botStage">
+            <div class="hud hud--tl"><span class="hud__dot"></span>AI core <b>online</b></div>
+            <div class="hud hud--tr">RZK-01</div>
+            <div class="hud hud--br">LiDAR · 360°</div>
+            <div class="hud hud--bl">12 DOF</div>
+            <span class="serial">Serial no. RZK-01-A</span>
+
+            <svg class="bot" viewBox="0 0 460 540" role="img" aria-label="Illustration of the ROBOZIK RZK-01 humanoid robot head and torso">
+              <defs>
+                <linearGradient id="g-metal" x1="0.1" y1="0" x2="0.9" y2="1">
+                  <stop offset="0" stop-color="#2b3f5c"/><stop offset=".35" stop-color="#16233a"/><stop offset=".62" stop-color="#0b1220"/><stop offset="1" stop-color="#1d2f47"/>
+                </linearGradient>
+                <linearGradient id="g-visor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#041019"/><stop offset="1" stop-color="#061a24"/>
+                </linearGradient>
+                <linearGradient id="g-stroke" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#22e6ff" stop-opacity=".7"/><stop offset=".5" stop-color="#8b7bff" stop-opacity=".18"/><stop offset="1" stop-color="#22e6ff" stop-opacity=".65"/>
+                </linearGradient>
+                <radialGradient id="g-core"><stop offset="0" stop-color="#c9fcff"/><stop offset=".35" stop-color="#22e6ff"/><stop offset="1" stop-color="#22e6ff" stop-opacity="0"/></radialGradient>
+                <clipPath id="clip-visor"><rect x="146" y="158" width="168" height="94" rx="38"/></clipPath>
+              </defs>
+
+              <g class="bot__rings" fill="none">
+                <circle cx="230" cy="262" r="214" stroke="url(#g-stroke)" stroke-dasharray="2 12"/>
+                <circle cx="230" cy="262" r="178" stroke="#22e6ff" stroke-opacity=".12" stroke-dasharray="38 82" stroke-width="2"/>
+                <g class="bot__orbit"><circle cx="230" cy="48" r="4.5" fill="#22e6ff"/><circle cx="230" cy="48" r="10" fill="#22e6ff" opacity=".18"/></g>
+                <g class="bot__orbit bot__orbit--rev"><circle cx="402" cy="330" r="3.5" fill="#8b7bff"/></g>
+              </g>
+
+              <path d="M96 500c4-56 44-86 96-98l38-6 38 6c52 12 92 42 96 98Z" fill="url(#g-metal)" stroke="#2a4a68" stroke-width="1.5"/>
+              <path d="M118 500c4-38 30-62 68-74" fill="none" stroke="#22e6ff" stroke-opacity=".22"/>
+              <path d="M342 500c-4-38-30-62-68-74" fill="none" stroke="#22e6ff" stroke-opacity=".22"/>
+              <g class="bot__core">
+                <circle cx="230" cy="452" r="42" fill="url(#g-core)" opacity=".28"/>
+                <circle cx="230" cy="452" r="19" fill="#07131f" stroke="#22e6ff" stroke-opacity=".55"/>
+                <circle cx="230" cy="452" r="8" fill="#22e6ff"/>
+                <circle cx="230" cy="452" r="13" fill="none" stroke="#22e6ff" stroke-opacity=".5" class="bot__pulse"/>
+              </g>
+              <text x="230" y="422" text-anchor="middle" fill="#5f819c" font-family="monospace" font-size="9" letter-spacing="3">RZK-01</text>
+
+              <rect x="204" y="352" width="52" height="60" rx="14" fill="#0a1320" stroke="#2a4a68"/>
+              <path d="M212 372h36M212 384h36M212 396h36" stroke="#22e6ff" stroke-opacity=".2"/>
+              <rect x="100" y="208" width="26" height="78" rx="12" fill="url(#g-metal)" stroke="#2a4a68"/>
+              <rect x="334" y="208" width="26" height="78" rx="12" fill="url(#g-metal)" stroke="#2a4a68"/>
+              <rect x="108" y="222" width="6" height="34" rx="3" fill="#22e6ff" opacity=".35"/>
+              <rect x="346" y="222" width="6" height="34" rx="3" fill="#22e6ff" opacity=".35"/>
+              <path d="M230 124v-40" stroke="#2a4a68" stroke-width="3" stroke-linecap="round"/>
+              <circle class="bot__antenna" cx="230" cy="78" r="8" fill="#22e6ff"/>
+
+              <rect x="122" y="120" width="216" height="242" rx="56" fill="url(#g-metal)" stroke="#2a4a68" stroke-width="1.5"/>
+              <rect x="150" y="132" width="160" height="10" rx="5" fill="#8fb6d4" opacity=".18"/>
+              <rect x="146" y="158" width="168" height="94" rx="38" fill="url(#g-visor)" stroke="#22e6ff" stroke-opacity=".35" stroke-width="1.5"/>
+              <g clip-path="url(#clip-visor)">
+                <g class="bot__eyes">
+                  <rect x="178" y="196" width="42" height="14" rx="7" fill="#22e6ff"/>
+                  <rect x="240" y="196" width="42" height="14" rx="7" fill="#8b7bff"/>
+                </g>
+                <rect class="bot__scan" x="146" y="150" width="168" height="26" fill="#22e6ff" opacity=".08"/>
+              </g>
+              <g stroke="#22e6ff" stroke-opacity=".35" stroke-linecap="round">
+                <path d="M168 280h22M168 292h22M168 304h14"/>
+                <path d="M292 280h-22M292 292h-22M292 304h-14"/>
+              </g>
+              <rect x="206" y="286" width="48" height="26" rx="10" fill="#060d16" stroke="#2a4a68"/>
+              <path d="M218 292v14M230 292v14M242 292v14" stroke="#22e6ff" stroke-opacity=".45" stroke-width="2"/>
+              <path d="M196 330h68" stroke="#22e6ff" stroke-opacity=".2"/>
+              <circle cx="140" cy="146" r="3" fill="#4d7391"/><circle cx="320" cy="146" r="3" fill="#4d7391"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#about" aria-label="Scroll to about section">
+        <span>Scroll</span><i></i>
+      </a>
+    </section>
+
+    <!-- ===== TICKER ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <div class="ticker__group">
+          <span class="ticker__item">Humanoid systems</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Machine vision</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Autonomous mobility</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Motion control</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Edge AI</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Industrial automation</span><span class="ticker__sep">◆</span>
+        </div>
+        <div class="ticker__group">
+          <span class="ticker__item">Humanoid systems</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Machine vision</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Autonomous mobility</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Motion control</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Edge AI</span><span class="ticker__sep">◆</span>
+          <span class="ticker__item">Industrial automation</span><span class="ticker__sep">◆</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section section--grid about" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__media" data-reveal>
+            <div class="lab-gallery">
+              <figure class="lab-img lab-img--a">
+                <img src="thinkin_bot_14050821_125647757.jpg" alt="ROBOZIK humanoid robot concept study, frame 01" loading="lazy" width="1080" height="1341">
+                <figcaption>CONCEPT / 01</figcaption>
+              </figure>
+              <figure class="lab-img lab-img--b">
+                <img src="thinkin_bot_14050821_125648948.jpg" alt="ROBOZIK humanoid robot concept study, frame 02" loading="lazy" width="1080" height="1341">
+                <figcaption>CONCEPT / 02</figcaption>
+              </figure>
+              <figure class="lab-img lab-img--c">
+                <img src="thinkin_bot_14050821_125650256.jpg" alt="ROBOZIK humanoid robot concept study, frame 03" loading="lazy" width="1080" height="1341">
+                <figcaption>CONCEPT / 03</figcaption>
+              </figure>
+              <figure class="lab-img lab-img--d">
+                <img src="thinkin_bot_14050821_125649881.jpg" alt="ROBOZIK humanoid robot concept study, frame 04" loading="lazy" width="1080" height="1341">
+                <figcaption>CONCEPT / 04</figcaption>
+              </figure>
+            </div>
+            <div class="lab-badge"><span>RZK LAB</span><b>SF / CA</b></div>
+          </div>
+
+          <div class="about__copy">
+            <p class="label" data-reveal>01 — Who we are</p>
+            <h2 class="h2" data-reveal style="--d:60ms">We build machines that <em>think, move</em> and learn.</h2>
+            <p data-reveal style="--d:120ms">ROBOZIK is a robotics lab at the intersection of mechatronics and embodied AI. Since 2019 we've shipped 128 machines into factories, laboratories and places humans shouldn't go.</p>
+            <p data-reveal style="--d:180ms">Our teams sit in one room — mechanical, electrical, firmware and machine learning — so a decision that used to take a month takes an afternoon.</p>
+            <ul class="checks" data-reveal style="--d:240ms">
+              <li><span class="checks__box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg></span>In-house mechanical, electrical &amp; firmware teams</li>
+              <li><span class="checks__box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg></span>Simulation-first design — 10,000 hours before metal</li>
+              <li><span class="checks__box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg></span>Safety certified to ISO 10218 &amp; ISO/TS 15066</li>
+            </ul>
+            <div class="about__stats" data-reveal style="--d:300ms">
+              <div><b>2019</b><span>Founded in SF</span></div>
+              <div><b>42</b><span>Patents filed</span></div>
+              <div><b>96%</b><span>Client retention</span></div>
+            </div>
+            <a class="link-arrow" href="#contact" data-reveal style="--d:360ms">Talk to an engineer <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section section--alt section--grid services" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="label" data-reveal>02 — What we do</p>
+            <h2 class="h2" data-reveal style="--d:60ms">Robotics, <em>end to end.</em></h2>
+          </div>
+          <p class="lead" data-reveal style="--d:120ms">Six disciplines, one team. We take machines from a napkin sketch to a certified fleet — without handing you off between vendors.</p>
+        </div>
+
+        <div class="services__grid">
+          <article class="svc spot" data-reveal style="--d:0ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chip"/></svg></span>
+              <span class="svc__index">01</span>
+            </div>
+            <h3>Humanoid engineering</h3>
+            <p>Full-stack humanoid design: actuation, balance, manipulation and embodied AI — from first sketch to field trials.</p>
+            <ul class="svc__tags"><li>Bipedal locomotion</li><li>Dexterous hands</li><li>Whole-body control</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="svc spot" data-reveal style="--d:70ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-eye"/></svg></span>
+              <span class="svc__index">02</span>
+            </div>
+            <h3>AI &amp; machine vision</h3>
+            <p>Custom perception stacks that see in dust, dark and motion — running on the edge at 120 frames per second.</p>
+            <ul class="svc__tags"><li>Edge inference</li><li>3D vision</li><li>Sensor fusion</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="svc spot" data-reveal style="--d:140ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rover"/></svg></span>
+              <span class="svc__index">03</span>
+            </div>
+            <h3>Autonomous mobility</h3>
+            <p>Self-navigating platforms for warehouses, campuses and hazardous sites. No tape, no rails, no babysitting.</p>
+            <ul class="svc__tags"><li>SLAM</li><li>Fleet control</li><li>Obstacle avoidance</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="svc spot" data-reveal style="--d:0ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arm"/></svg></span>
+              <span class="svc__index">04</span>
+            </div>
+            <h3>Industrial automation</h3>
+            <p>Robotic cells that lift, weld, sort and inspect — retrofitted to your line without stopping production.</p>
+            <ul class="svc__tags"><li>Cobots</li><li>PLC integration</li><li>Safety systems</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="svc spot" data-reveal style="--d:70ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+              <span class="svc__index">05</span>
+            </div>
+            <h3>Custom robotics</h3>
+            <p>One-of-one machines for problems nobody has solved yet. Our lab becomes your R&amp;D department.</p>
+            <ul class="svc__tags"><li>Prototyping</li><li>Mechatronics</li><li>Rapid iteration</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="svc spot" data-reveal style="--d:140ms">
+            <div class="svc__top">
+              <span class="svc__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-support"/></svg></span>
+              <span class="svc__index">06</span>
+            </div>
+            <h3>Fleet support</h3>
+            <p>Monitoring, predictive maintenance and over-the-air updates for every unit you run. Anywhere on earth.</p>
+            <ul class="svc__tags"><li>24/7 telemetry</li><li>OTA updates</li><li>On-site service</li></ul>
+            <a class="svc__more" href="#contact">Start a project <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== ROBOTS ===== -->
+    <section class="section robots" id="robots">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="label" data-reveal>03 — The fleet</p>
+            <h2 class="h2" data-reveal style="--d:60ms">Machines <em>in production.</em></h2>
+          </div>
+          <p class="lead" data-reveal style="--d:120ms">Three platforms, endlessly configurable. Each ships with our autonomy stack, live telemetry and a support plan that actually answers.</p>
+        </div>
+
+        <div class="robots__grid">
+          <article class="robot-card" data-tilt data-reveal style="--d:0ms">
+            <div class="robot-card__stage">
+              <span class="chip chip--live"><i></i>Field ready</span>
+              <svg class="robot-card__fig" viewBox="0 0 180 240" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="ATLAS-X humanoid robot line drawing">
+                <circle cx="90" cy="44" r="24"/>
+                <path d="M90 20V10"/><circle cx="90" cy="7" r="2.6" fill="#22e6ff" stroke="none"/>
+                <rect x="78" y="36" width="9" height="6" rx="2" fill="#22e6ff" stroke="none"/>
+                <rect x="93" y="36" width="9" height="6" rx="2" fill="#22e6ff" stroke="none"/>
+                <path d="M82 56h16M90 68v12"/>
+                <path d="M56 96c8-12 20-16 34-16s26 4 34 16l-4 52H60l-4-52Z"/>
+                <circle cx="90" cy="110" r="8" fill="rgba(34,230,255,.18)"/>
+                <path d="M58 100 38 128l-6 36M122 100l20 28 6 36"/>
+                <circle cx="56" cy="100" r="6"/><circle cx="124" cy="100" r="6"/>
+                <circle cx="32" cy="164" r="6"/><circle cx="148" cy="164" r="6"/>
+                <path d="M72 148v30l-4 34M108 148v30l4 34"/>
+                <circle cx="72" cy="180" r="4"/><circle cx="108" cy="180" r="4"/>
+                <path d="M60 212h18M102 212h18"/>
+                <path d="M68 118h44M64 130h52"/>
+              </svg>
+            </div>
+            <div class="robot-card__body">
+              <div class="robot-card__head">
+                <div><h3>ATLAS-X</h3><p>Humanoid field operator</p></div>
+                <a href="#contact" class="round-btn" aria-label="Ask about ATLAS-X"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <dl class="specs">
+                <div><dt>Height</dt><dd>1.72 m</dd></div>
+                <div><dt>Payload</dt><dd>24 kg</dd></div>
+                <div><dt>Runtime</dt><dd>8 h</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="robot-card" data-tilt data-reveal style="--d:90ms">
+            <div class="robot-card__stage">
+              <span class="chip chip--pilot"><i></i>Pilot program</span>
+              <svg class="robot-card__fig" viewBox="0 0 200 210" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="NOVA-R autonomous rover line drawing">
+                <rect x="30" y="60" width="140" height="70" rx="18"/>
+                <path d="M52 60V40h20M30 92h140"/>
+                <circle cx="62" cy="34" r="8"/><circle cx="62" cy="34" r="3" fill="#22e6ff" stroke="none"/>
+                <circle cx="60" cy="132" r="12"/><circle cx="100" cy="132" r="12"/><circle cx="140" cy="132" r="12"/>
+                <circle cx="60" cy="132" r="4"/><circle cx="100" cy="132" r="4"/><circle cx="140" cy="132" r="4"/>
+                <path d="M118 76h28M118 84h18"/>
+                <rect x="78" y="72" width="24" height="14" rx="4" fill="rgba(34,230,255,.18)"/>
+                <path d="M44 112v18M156 112v18"/>
+              </svg>
+            </div>
+            <div class="robot-card__body">
+              <div class="robot-card__head">
+                <div><h3>NOVA-R</h3><p>Autonomous inspection rover</p></div>
+                <a href="#contact" class="round-btn" aria-label="Ask about NOVA-R"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <dl class="specs">
+                <div><dt>Speed</dt><dd>6.4 m/s</dd></div>
+                <div><dt>Endurance</dt><dd>12 h</dd></div>
+                <div><dt>Sensors</dt><dd>360° LiDAR</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="robot-card" data-tilt data-reveal style="--d:180ms">
+            <div class="robot-card__stage">
+              <span class="chip chip--new"><i></i>New release</span>
+              <svg class="robot-card__fig" viewBox="0 0 200 240" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="ARM-7 industrial robot arm line drawing">
+                <path d="M48 210h104"/>
+                <rect x="82" y="182" width="36" height="28" rx="6"/>
+                <circle cx="100" cy="166" r="14"/>
+                <path d="M100 152v-32"/><circle cx="100" cy="106" r="14"/>
+                <path d="m111 98 38-32"/><circle cx="156" cy="60" r="12"/>
+                <path d="m167 54 15-10M167 66l15 10"/>
+                <path d="M74 210v-16M126 210v-16"/>
+                <path d="M96 166h8M96 106h8"/>
+              </svg>
+            </div>
+            <div class="robot-card__body">
+              <div class="robot-card__head">
+                <div><h3>ARM-7</h3><p>Precision industrial arm</p></div>
+                <a href="#contact" class="round-btn" aria-label="Ask about ARM-7"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <dl class="specs">
+                <div><dt>Reach</dt><dd>2.1 m</dd></div>
+                <div><dt>Payload</dt><dd>80 kg</dd></div>
+                <div><dt>Repeatability</dt><dd>±0.02 mm</dd></div>
+              </dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section section--alt section--grid process" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="label" data-reveal>04 — How we work</p>
+            <h2 class="h2" data-reveal style="--d:60ms">From brief to <em>boot-up.</em></h2>
+          </div>
+          <p class="lead" data-reveal style="--d:120ms">A tight loop of design, simulation and field testing. Most programs hit a working prototype in 10–14 weeks.</p>
+        </div>
+
+        <div class="steps" data-reveal>
+          <div class="step">
+            <span class="step__num">01</span>
+            <h3>Brief</h3>
+            <p>A working session, not a sales call. We map constraints, budget and what success actually looks like.</p>
+          </div>
+          <div class="step">
+            <span class="step__num">02</span>
+            <h3>Simulate</h3>
+            <p>Digital twin first. Thousands of cycles in physics before a single chip is cut.</p>
+          </div>
+          <div class="step">
+            <span class="step__num">03</span>
+            <h3>Prototype</h3>
+            <p>Instrumented hardware in weeks, not quarters — then pushed until it breaks, and rebuilt.</p>
+          </div>
+          <div class="step">
+            <span class="step__num">04</span>
+            <h3>Deploy</h3>
+            <p>Certification, operator training and live telemetry. Then we stay on call.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section quotes">
+      <div class="container quotes__grid">
+        <div class="quotes__intro">
+          <p class="label" data-reveal>05 — Signals</p>
+          <h2 class="h2" data-reveal style="--d:60ms">Operators, <em>on the record.</em></h2>
+          <p class="lead" data-reveal style="--d:120ms">No stock photos, no invented logos. Just people who let our machines into their buildings.</p>
+          <div class="t-controls" data-reveal style="--d:180ms">
+            <button class="round-btn" type="button" data-t-prev aria-label="Previous testimonial"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+            <span class="t-count"><b id="tCurrent">01</b> <span>/ 03</span></span>
+            <button class="round-btn" type="button" data-t-next aria-label="Next testimonial"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+
+        <div class="t-slider" id="tSlider" aria-live="polite" data-reveal style="--d:120ms">
+          <article class="t-slide is-active">
+            <div class="t-slide__mark">“</div>
+            <blockquote>ROBOZIK delivered a humanoid inspection unit that cut our downtime by 38%. They treat hardware like software — iterating fast, measuring everything.</blockquote>
+            <div class="t-slide__author">
+              <span class="avatar">MC</span>
+              <div><strong>Maya Chen</strong><span>VP Operations · Helix Energy</span></div>
+            </div>
+          </article>
+          <article class="t-slide">
+            <div class="t-slide__mark">“</div>
+            <blockquote>From CAD to a working prototype in eleven weeks. Their motion-control stack is the most stable we've integrated in a decade.</blockquote>
+            <div class="t-slide__author">
+              <span class="avatar">DO</span>
+              <div><strong>Daniel Okafor</strong><span>Head of Automation · Northwind Manufacturing</span></div>
+            </div>
+          </article>
+          <article class="t-slide">
+            <div class="t-slide__mark">“</div>
+            <blockquote>The vision system catches defects our line cameras missed. It paid for itself inside one quarter — and support answers in minutes.</blockquote>
+            <div class="t-slide__author">
+              <span class="avatar">SM</span>
+              <div><strong>Sofia Marques</strong><span>Plant Director · Volt Automotive</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section section--grid contact" id="contact">
+      <div class="container contact__grid">
+        <div class="contact__intro">
+          <p class="label" data-reveal>06 — New projects</p>
+          <h2 class="h2" data-reveal style="--d:60ms">Let's build something <em>intelligent.</em></h2>
+          <p class="lead" data-reveal style="--d:120ms">Tell us what you're trying to automate. We'll come back within two working days with a feasibility read and a rough path to prototype.</p>
+
+          <ul class="contact__list" data-reveal style="--d:180ms">
+            <li>
+              <span class="icon-box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <div><span>New projects</span><a href="mailto:hello@robozik.io">hello@robozik.io</a></div>
+            </li>
+            <li>
+              <span class="icon-box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <div><span>Fleet support</span><a href="tel:+14155550198">+1 (415) 555-0198</a></div>
+            </li>
+            <li>
+              <span class="icon-box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <div><span>The lab</span><p>48 Innovation Drive, San Francisco, CA</p></div>
+            </li>
+          </ul>
+
+          <div class="availability" data-reveal style="--d:240ms">
+            <span class="availability__dot"></span>
+            <div><b>Now booking Q1 2027</b><span>Two build slots remaining</span></div>
+          </div>
+
+          <div class="socials" data-reveal style="--d:300ms">
+            <a href="#" aria-label="X / Twitter" class="social"><svg viewBox="0 0 24 24"><use href="#i-x"/></svg></a>
+            <a href="#" aria-label="LinkedIn" class="social"><svg viewBox="0 0 24 24"><use href="#i-in"/></svg></a>
+            <a href="#" aria-label="GitHub" class="social"><svg viewBox="0 0 24 24"><use href="#i-gh"/></svg></a>
+            <a href="#" aria-label="YouTube" class="social"><svg viewBox="0 0 24 24"><use href="#i-yt"/></svg></a>
+          </div>
+        </div>
+
+        <div class="form-card" data-reveal style="--d:140ms">
+          <div class="form-card__head">
+            <span class="form-card__tag"><span class="hud__dot"></span>Project intake</span>
+            <span class="form-card__code">FORM / 06</span>
+          </div>
+          <form class="form" id="contactForm">
+            <div class="form__row">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="Ada Lovelace" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Work email</label>
+                <input id="email" name="email" type="email" placeholder="ada@company.com" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="project">Project type</label>
+              <select id="project" name="project" required>
+                <option value="" selected disabled>Select a focus</option>
+                <option>Humanoid platform</option>
+                <option>Machine vision</option>
+                <option>Autonomous mobility</option>
+                <option>Industrial automation</option>
+                <option>Custom build</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">What are you building?</label>
+              <textarea id="message" name="message" rows="4" placeholder="A few lines on the problem, the environment, and your timeline." required></textarea>
+            </div>
+            <button class="btn btn--primary form__submit" type="submit" data-magnetic>Send transmission <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <p class="form__note">Typical reply within 2 working days. No newsletters, no spam — just engineers.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="#home" aria-label="ROBOZIK home">
+            <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-logo"/></svg>
+            <span class="brand__word">ROBO<em>ZIK</em></span>
+          </a>
+          <p>Machines that think ahead. Designed, built and tested in San Francisco since 2019.</p>
+          <form class="newsletter" id="newsletterForm">
+            <label class="sr-only" for="newsletterEmail">Email for the lab log</label>
+            <input id="newsletterEmail" type="email" name="email" placeholder="Email for the lab log" autocomplete="email" required>
+            <button type="submit" aria-label="Subscribe"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </form>
+          <span class="footer__micro">Monthly field notes. Unsubscribe in one click.</span>
+        </div>
+
+        <nav class="footer__col" aria-label="Company">
+          <h4>Company</h4>
+          <a href="#about">About</a>
+          <a href="#robots">Robots</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Careers</a>
+        </nav>
+        <nav class="footer__col" aria-label="Services">
+          <h4>Services</h4>
+          <a href="#services">Humanoids</a>
+          <a href="#services">Machine vision</a>
+          <a href="#services">Mobility</a>
+          <a href="#services">Fleet support</a>
+        </nav>
+        <nav class="footer__col" aria-label="Connect">
+          <h4>Connect</h4>
+          <a href="#">X / Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">YouTube</a>
+        </nav>
+      </div>
+
+      <div class="footer__word" aria-hidden="true">ROBOZIK</div>
+
+      <div class="footer__bottom">
+        <p>© <span id="year">2026</span> ROBOZIK Robotics Inc. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+        </div>
+        <span class="status-pill"><i></i>All systems operational</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== OVERLAYS ===== -->
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg></span>
+    <span id="toastMsg">Message sent.</span>
+  </div>
+
+  <dialog class="modal" id="reelModal" aria-labelledby="reelTitle">
+    <div class="modal__panel">
+      <header class="modal__bar">
+        <span class="modal__tag"><i></i>ROBOZIK · Field reel 2026</span>
+        <button class="modal__close" type="button" data-close-reel aria-label="Close reel"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </header>
+      <div class="reel">
+        <div class="reel__stage" id="reelStage">
+          <div class="reel__hud">
+            <span class="reel__rec"><i></i>REC <b id="reelTimer">00:00:00</b></span>
+            <span>CAM 04 · 50MM</span>
+            <span class="reel__iso">ISO 640 · f/1.8</span>
+          </div>
+          <div class="reel__nav">
+            <button type="button" data-reel-prev aria-label="Previous frame"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+            <button type="button" data-reel-next aria-label="Next frame"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div class="reel__meta">
+          <p class="label">Field reel — 2026</p>
+          <h2 id="reelTitle">Inside the lab</h2>
+          <p>Nine frames from the humanoid program — balance trials, vision calibration, and the quiet moments in between.</p>
+          <dl class="reel__specs">
+            <div><dt>Unit</dt><dd>RZK-01</dd></div>
+            <div><dt>Location</dt><dd>SF / Lab 03</dd></div>
+            <div><dt>Status</dt><dd class="ok">Field ready</dd></div>
+          </dl>
+          <div class="reel__dots" id="reelDots"></div>
+          <div class="reel__foot">
+            <span id="reelCount">01 / 09</span>
+            <span class="reel__auto">Autoplay</span>
+          </div>
+          <div class="reel__progress"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
